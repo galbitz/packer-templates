@@ -6,10 +6,12 @@ Vagrant.configure(2) do |config|
   config.vm.communicator = "winrm"
   config.vm.boot_timeout = 300
   config.vm.network :forwarded_port, guest: 3389, host: 3389, id: 'rdp', auto_correct: true
+  config.winrm.username = "Administrator"
 
   config.vm.provider "virtualbox" do |vb|
     vb.gui = true
     vb.memory = 1024
+    vb.customize ['modifyvm', :id, '--clipboard', 'bidirectional']  
   end
 
   config.vm.provider 'hyperv' do |hv|
